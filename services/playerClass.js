@@ -4,10 +4,10 @@ gameApp.factory('playerClass', [function() {
             return {
                 draw: function(canvas) {
                     canvas.beginPath();
-                    canvas.arc(50, 50, 10, 0, Math.PI*2);
+                    canvas.arc(canvas.width / 2, canvas.height / 2, 10, 0, Math.PI*2);
                     canvas.fillStyle = '#0095DD';
                     canvas.fill();
-                    canvas.endPath();
+                    canvas.closePath();
                 }
             };
         }
