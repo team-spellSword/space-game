@@ -11,16 +11,20 @@ gameApp.directive('ssCanvas', ['graphicsEngineService', function(graphicsEngineS
     };
 }]);
 
-gameApp.controller('main', ['playerClass', 'graphicsEngineService', 'keyEventService',
-function(playerClass, graphicsEngineService, keyEventService) {
+gameApp.controller('main', ['playerClass', 'graphicsEngineService', 'keyEventService', 'mobClass',
+function(playerClass, graphicsEngineService, keyEventService, mobClass) {
     var player1 = playerClass.create();
+    var mobs = [mobClass.circleMob(), mobClass.circleMob()];
 
-    var draw = function() {
+    function draw() {
         graphicsEngineService.clearCanvas();
         keyEventService.register(player1);
+        for (var i = 0; i < mobs.length; i++) {
+            graphicsEngineService.drawMob(mobs[i]);
+        }
         graphicsEngineService.draw(player1);
         graphicsEngineService.drawFloor();
-    };
+    }
 
     setInterval(draw, 10);
 }]);

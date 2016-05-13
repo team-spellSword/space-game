@@ -9,11 +9,11 @@ function(collisionService) {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         },
         draw: function(object) {
+            object.location.x += object.horzV;
+            object.location.y += object.vertV;
             if (!collisionService.collideFloor(this.canvas, object)) {
                 object.resolveGravity();
             }
-            object.location.x += object.horzV;
-            object.location.y += object.vertV;
             this.ctx.beginPath();
             this.ctx.arc(object.location.x, object.location.y, object.radius, 0, Math.PI*2, false);
             this.ctx.fillstyle = object.color;
@@ -26,6 +26,7 @@ function(collisionService) {
             this.ctx.fillstyle = 'red';
             this.ctx.fill();
             this.ctx.closePath();
-        }
+        },
+        drawMob()
     };
 }]);
