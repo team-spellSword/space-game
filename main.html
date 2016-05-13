@@ -7,9 +7,13 @@
         <script src='vendor/angular.min.js'></script>
     </head>
     <body ng-app='app' ng-controller='main'>
-        <canvas id='canvas' width='450' height='320'></canvas>
+        <ss-canvas></ss-canvas>
         <script src='app.js'></script>
-        <script src='services/playerClass.js'></script>
+        <script src='classes/player.js'></script>
+        <script src='services/environment.js'></script>
+        <script src='services/graphicsEngine.js'></script>
+        <script src='services/keyEvent.js'></script>
+        <script src='services/collision.js'></script>
         <script src='constants.js'></script>
     </body>
 </html>
