@@ -12,18 +12,22 @@ function(environmentConstants, weaponsClass) {
                 horzV: 0, //positive is right
                 vertV: 0, //positive is down
                 weapon: weaponsClass.datgun,
+                acted: false,
                 resolveGravity: function() {
                     this.vertV += environmentConstants.gravityFactor;
                 },
                 act: function() {
-                    this.weapon.act(this.location);
+                    if (!this.acted) { this.weapon.act(this.location); }
+                    this.acted = true;
                 },
                 moveLeft: function() {
+                    this.direction = 'left';
                     if (this.horzV > -this.maxSpeed) {
                         this.horzV -= this.acceleration;
                     }
                 },
                 moveRight: function() {
+                    this.direction = 'right';
                     if (this.horzV < this.maxSpeed) {
                         this.horzV += this.acceleration;
                     }
