@@ -1,5 +1,5 @@
-gameApp.factory('playerClass', ['environmentConstants', 'weaponsService',
-function(environmentConstants, weaponsService) {
+gameApp.factory('playerClass', ['environmentConstants', 'weaponsClass',
+function(environmentConstants, weaponsClass) {
     return {
         create: function() {
             return {
@@ -11,7 +11,7 @@ function(environmentConstants, weaponsService) {
                 acceleration: 0.25,
                 horzV: 0, //positive is right
                 vertV: 0, //positive is down
-                weapon: weaponsService.datgun,
+                weapon: weaponsClass.datgun,
                 resolveGravity: function() {
                     this.vertV += environmentConstants.gravityFactor;
                 },

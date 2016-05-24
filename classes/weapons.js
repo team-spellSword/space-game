@@ -1,4 +1,4 @@
-gameApp.factory('weaponsService', ['graphicsEngineService',
+gameApp.factory('weaponsClass', ['graphicsEngineService',
 function(graphicsEngineService) {
     return {
         datgun: {
