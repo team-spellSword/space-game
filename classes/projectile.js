@@ -2,18 +2,12 @@ gameApp.factory('projectileClass', ['graphicsEngineService', 'environmentConstan
 function(graphicsEngineService, environmentConstants) {
     return {
         createBullet: function(weapon, direction, location) {
-            function calcV() {
-                if (direction === 'right') {
-                    return weapon.projectileSpeed;
-                } else {
-                    return -weapon.projectileSpeed;
-                }
-            }
+            var dir = {'right': weapon.projectileSpeed, 'left': -weapon.projectileSpeed};
             var bullet = {
                 location: Object.create(location),
                 color: 'white',
                 radius: 2,
-                horzV: calcV(),
+                horzV: dir[direction],
                 resolveGravity: function() {
                     this.vertV += environmentConstants.gravityFactor;
                 }
