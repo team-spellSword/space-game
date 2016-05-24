@@ -19,14 +19,14 @@ function(collisionService) {
             }
             this.ctx.beginPath();
             this.ctx.arc(object.location.x, object.location.y, object.radius, 0, Math.PI*2, false);
-            this.ctx.fillstyle = object.color;
+            this.ctx.fillStyle = object.color;
             this.ctx.fill();
             this.ctx.closePath();
         },
         drawFloor: function() {
             this.ctx.beginPath();
             this.ctx.rect(0, this.canvas.height - 10, this.canvas.width, 10);
-            this.ctx.fillstyle = 'red';
+            this.ctx.fillStyle = 'red';
             this.ctx.fill();
             this.ctx.closePath();
         }

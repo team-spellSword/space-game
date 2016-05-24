@@ -5,7 +5,7 @@ function(environmentConstants, weaponsClass) {
             return {
                 location: { x: 0, y: 0 },
                 direction: 'right',
-                color: 'white',
+                color: 'blue',
                 radius: 20,
                 maxSpeed: 4.5,
                 acceleration: 0.25,

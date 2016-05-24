@@ -11,22 +11,21 @@ gameApp.directive('ssCanvas', ['graphicsEngineService', function(graphicsEngineS
     };
 }]);
 
-gameApp.controller('main', ['playerClass', 'graphicsEngineService', 'keyEventService', 'mobClass', '$scope',
-function(playerClass, graphicsEngineService, keyEventService, mobClass, $scope) {
+gameApp.controller('main', ['playerClass', 'graphicsEngineService', 'keyEventService', 'mobClass', 'collisionService',
+function(playerClass, graphicsEngineService, keyEventService, mobClass, collisionService) {
     var players = [playerClass.create()];
     var mobs = [mobClass.circleMob(), mobClass.circleMob()];
     graphicsEngineService.activeSprites = mobs.concat(players);
-    $scope.sprites = graphicsEngineService.activeSprites;
-    window.$scope = $scope;
 
-    function draw() {
+    function gameLoop() {
         graphicsEngineService.clearCanvas();
         keyEventService.register(players[0]);
         for (var i = 0; i < graphicsEngineService.activeSprites.length; i++) {
+            collisionService.collideProjectile(i, graphicsEngineService.activeSprites);
             graphicsEngineService.draw(graphicsEngineService.activeSprites[i]);
         }
         graphicsEngineService.drawFloor();
     }
 
-    setInterval(draw, 10);
+    setInterval(gameLoop, 10);
 }]);

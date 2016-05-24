@@ -9,6 +9,9 @@ gameApp.factory('collisionService', [function() {
             } else {
                 return false;
             }
+        },
+        collideProjectile: function(index, activeSprites) {
+            
         }
     };
 }]);
