@@ -26,7 +26,6 @@ function(collisionService) {
             this.ctx.fillstyle = 'red';
             this.ctx.fill();
             this.ctx.closePath();
-        },
-        drawMob()
+        }
     };
 }]);
