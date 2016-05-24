@@ -17,7 +17,7 @@ function(environmentConstants, weaponsClass) {
                     this.vertV += environmentConstants.gravityFactor;
                 },
                 act: function() {
-                    if (!this.acted) { this.weapon.act(this.location); }
+                    if (!this.acted) { this.weapon.act(this.direction, this.location); }
                     this.acted = true;
                 },
                 moveLeft: function() {

@@ -11,18 +11,19 @@ gameApp.directive('ssCanvas', ['graphicsEngineService', function(graphicsEngineS
     };
 }]);
 
-gameApp.controller('main', ['playerClass', 'graphicsEngineService', 'keyEventService', 'mobClass',
-function(playerClass, graphicsEngineService, keyEventService, mobClass) {
-    var player1 = playerClass.create();
-    var players = [player1];
+gameApp.controller('main', ['playerClass', 'graphicsEngineService', 'keyEventService', 'mobClass', '$scope',
+function(playerClass, graphicsEngineService, keyEventService, mobClass, $scope) {
+    var players = [playerClass.create()];
     var mobs = [mobClass.circleMob(), mobClass.circleMob()];
-    var characters = mobs.concat(players);
+    graphicsEngineService.activeSprites = mobs.concat(players);
+    $scope.sprites = graphicsEngineService.activeSprites;
+    window.$scope = $scope;
 
     function draw() {
         graphicsEngineService.clearCanvas();
-        keyEventService.register(player1);
-        for (var i = 0; i < characters.length; i++) {
-            graphicsEngineService.draw(characters[i]);
+        keyEventService.register(players[0]);
+        for (var i = 0; i < graphicsEngineService.activeSprites.length; i++) {
+            graphicsEngineService.draw(graphicsEngineService.activeSprites[i]);
         }
         graphicsEngineService.drawFloor();
     }

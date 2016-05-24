@@ -1,6 +1,7 @@
 gameApp.factory('graphicsEngineService', ['collisionService',
 function(collisionService) {
     return {
+        activeSprites: [],
         initialize: function(canvas) {
             this.canvas = canvas;
             this.ctx = canvas.getContext('2d');
@@ -13,6 +14,8 @@ function(collisionService) {
             object.location.y += object.vertV;
             if (!collisionService.collideFloor(this.canvas, object)) {
                 object.resolveGravity();
+            } else {
+                object.collided = true;
             }
             this.ctx.beginPath();
             this.ctx.arc(object.location.x, object.location.y, object.radius, 0, Math.PI*2, false);
