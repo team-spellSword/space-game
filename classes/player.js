@@ -7,7 +7,7 @@ function(environmentConstants, weaponsClass) {
                 direction: 'right',
                 color: 'white',
                 radius: 20,
-                maxSpeed: 3.5,
+                maxSpeed: 4.5,
                 acceleration: 0.25,
                 horzV: 0, //positive is right
                 vertV: 0, //positive is down
@@ -37,7 +37,7 @@ function(environmentConstants, weaponsClass) {
                 },
                 jump: function() {
                     if (this.grounded) {
-                        this.vertV -= 20;
+                        this.vertV -= 12.5;
                     }
                     this.grounded = false;
                 }

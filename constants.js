@@ -4,5 +4,5 @@ gameApp.constant('keyBindingConstants', {
     jump: 32
 });
 gameApp.constant('environmentConstants', {
-    gravityFactor: 1
+    gravityFactor: 0.4
 });
