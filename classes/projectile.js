@@ -7,11 +7,11 @@ function(graphicsEngineService, environmentConstants) {
                 location: Object.create(location),
                 projectile: true,
                 color: 'black',
-                radius: 2,
+                radius: 4,
                 horzV: dir[direction],
                 vertV: 0,
                 resolveGravity: function() {
-                    // this.vertV += environmentConstants.gravityFactor;
+                    this.vertV += 0.01 * environmentConstants.gravityFactor;
                 },
                 collideWith: function(object) {
                     if (

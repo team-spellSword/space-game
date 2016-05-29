@@ -22,7 +22,7 @@ function(playerClass, graphicsEngineService, keyEventService, mobClass, collisio
         keyEventService.register(players[0]);
         for (var i = 0; i < graphicsEngineService.activeSprites.length; i++) {
             collisionService.collideProjectile(i, graphicsEngineService.activeSprites);
-            graphicsEngineService.draw(graphicsEngineService.activeSprites[i]);
+            graphicsEngineService.draw(graphicsEngineService.activeSprites[i], i);
         }
         graphicsEngineService.drawFloor();
     }
