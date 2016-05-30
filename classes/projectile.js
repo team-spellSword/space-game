@@ -10,6 +10,7 @@ function(graphicsEngineService, environmentConstants) {
                 radius: 4,
                 horzV: dir[direction],
                 vertV: 0,
+                damage: weapon.damage,
                 resolveGravity: function() {
                     this.vertV += 0.01 * environmentConstants.gravityFactor;
                 },

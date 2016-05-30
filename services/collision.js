@@ -14,7 +14,7 @@ gameApp.factory('collisionService', [function() {
         collideProjectile: function(projectile, index, activeSprites) {
             for (var i = 0; i < activeSprites.length; i++) {
                 if (!activeSprites[i].projectile && projectile.collideWith(activeSprites[i])) {
-                    activeSprites[i].takeHit();
+                    activeSprites[i].takeHit(projectile.damage, activeSprites);
                     activeSprites.splice(activeSprites.indexOf(projectile), 1);
                     break;
                 }
