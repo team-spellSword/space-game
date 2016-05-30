@@ -15,12 +15,10 @@ function(collisionService) {
             if (!collisionService.collideFloor(this.canvas, object)) {
                 object.resolveGravity();
             } else {
-                if (object.projectile) {
-                    this.activeSprites.splice(index, 1);
-                } else {
-                    object.collided = true;
-                }
+                if (object.projectile) { this.activeSprites.splice(index, 1); }
             }
+            if (object.projectile) { collisionService.collideProjectile(object, index, this.activeSprites); }
+            else { object.setEdges(); }
             this.ctx.beginPath();
             this.ctx.arc(object.location.x, object.location.y, object.radius, 0, Math.PI*2, false);
             this.ctx.fillStyle = object.color;

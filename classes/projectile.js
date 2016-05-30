@@ -15,8 +15,8 @@ function(graphicsEngineService, environmentConstants) {
                 },
                 collideWith: function(object) {
                     if (
-                            (this.location.x >= object.leftEdge() && this.location.x <= object.rightEdge()) && // Collide x
-                            (this.location.y >= object.bottomEdge() && this.location.y <= object.topEdge()) // Collide y
+                            (this.location.x >= object.leftEdge && this.location.x <= object.rightEdge) && // Collide x
+                            (this.location.y <= object.bottomEdge && this.location.y >= object.topEdge) // Collide y
                         ) { return true; }
                 }
             };
