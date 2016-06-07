@@ -13,8 +13,15 @@ function(environmentConstants, weaponsClass) {
                 vertV: 0, //positive is down
                 weapon: weaponsClass.datgun,
                 acted: false,
+                hitPoints: [50, 50],
                 resolveGravity: function() {
                     this.vertV += environmentConstants.gravityFactor;
+                },
+                setEdges: function() {
+                    this.leftEdge = this.location.x - this.radius;
+                    this.rightEdge = this.location.x + this.radius;
+                    this.topEdge = this.location.y - this.radius;
+                    this.bottomEdge = this.location.y + this.radius;
                 },
                 act: function() {
                     if (!this.acted) { this.weapon.act(this.direction, this.location); }

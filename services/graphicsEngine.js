@@ -9,14 +9,16 @@ function(collisionService) {
         clearCanvas: function() {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         },
-        draw: function(object) {
+        draw: function(object, index) {
             object.location.x += object.horzV;
             object.location.y += object.vertV;
             if (!collisionService.collideFloor(this.canvas, object)) {
                 object.resolveGravity();
             } else {
-                object.collided = true;
+                if (object.projectile) { this.activeSprites.splice(index, 1); }
             }
+            if (object.projectile) { collisionService.collideProjectile(object, index, this.activeSprites); }
+            else { object.setEdges(); }
             this.ctx.beginPath();
             this.ctx.arc(object.location.x, object.location.y, object.radius, 0, Math.PI*2, false);
             this.ctx.fillStyle = object.color;
