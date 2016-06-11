@@ -14,6 +14,7 @@ function(environmentConstants, weaponsClass) {
                 weapon: weaponsClass.datgun,
                 acted: false,
                 hitPoints: [50, 50],
+                player: true,
                 resolveGravity: function() {
                     this.vertV += environmentConstants.gravityFactor;
                 },
@@ -50,8 +51,15 @@ function(environmentConstants, weaponsClass) {
                     if (this.grounded) {
                         this.vertV -= 12.5;
                     }
-                    this.grounded = false;
-                }
+                },
+                collideWith: function(mob) {
+                        if (
+                            //right jump: check right crossing mob left and top within mob body while left not crossing mob right.
+                            (this.rightEdge >= mob.leftEdge && this.topEdge <= mob.bottomEdge && this.topEdge >= mob.topEdge && !this.leftEdge >= mob.rightEdge)
+                            //left jump: check left crossing mob right and top within mob body while right not crossing mob left.
+                            // (this.leftEdge >= mob.rightEdge && this.topEdge <= mob.bottomEdge && this.topEdge >= mob.topEdge && !this.rightEdge >= mob.leftEdge)
+                        ) { console.log('touch'); }
+                }           
             };
         }
     };
