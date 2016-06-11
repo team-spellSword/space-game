@@ -24,6 +24,7 @@ gameApp.factory('collisionService', [function() {
             for (var i = 0; i < activeSprites.length; i++) {
                 if (!activeSprites[i].projectile && character !== activeSprites[i] && character.collideWith(activeSprites[i])) {
                     // activeSprites[i].takeHit(activeSprites[i].damage, activeSprites);
+                    console.log('collide');
                 }
             }
         }        
