@@ -55,13 +55,19 @@ function(environmentConstants, weaponsClass) {
                 },
                 collideWith: function(mob) {
                         if (
-                            //right jump: check right crossing mob left and top within mob body while left not crossing mob right.
-                            this.rightEdge >= mob.leftEdge && this.topEdge <= mob.bottomEdge && this.topEdge >= mob.topEdge && !this.leftEdge >= mob.rightEdge
-                            // this.rightEdge >= mob.leftEdge && this.topEdge <= mob.bottomEdge && this.topEdge >= mob.topEdge
-                            //left jump: check left crossing mob right and top within mob body while right not crossing mob left.
-                            // (this.leftEdge >= mob.rightEdge && this.topEdge <= mob.bottomEdge && this.topEdge >= mob.topEdge && !this.rightEdge >= mob.leftEdge)
-                        ) { return true; }
-                }           
+                            //check top: check right crossing mob left and top within mob body but and if left crosses mob right
+                            this.rightEdge >= mob.leftEdge && this.topEdge <= mob.bottomEdge && this.topEdge >= mob.topEdge && this.leftEdge <= mob.rightEdge) {return true;}
+                            // or
+                            //check bottom: check left crossing mob right and bottom within mob body while left past mob.
+                            //for the future when the mob jumps (check later when we can use)
+                        // if (this.leftEdge <= mob.rightEdge && this.bottomEdge <= mob.bottomEdge && this.bottomEdge >= mob.topEdge && this.rightEdge <= mob.leftEdge
+                        // ) { console.log('bottom'); }
+                },
+                takeHit: function(damage, activeSprites) {
+                    this.hitPoints[0] -= damage;
+                    if (this.hitPoints[0] < 1) { activeSprites.splice(activeSprites.indexOf(this), 1); }
+                    console.log(this.hitPoints);
+                }       
             };
         }
     };

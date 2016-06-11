@@ -11,6 +11,7 @@ gameApp.factory('mobClass', ['environmentConstants', function(environmentConstan
                 horzV: -.3,
                 vertV: 0,
                 hitPoints: [50, 50],
+                damage: 1,
                 resolveGravity: function() {
                     this.vertV += environmentConstants.gravityFactor;
                 },
