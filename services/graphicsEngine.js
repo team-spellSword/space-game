@@ -25,6 +25,8 @@ function(collisionService) {
                     collisionService.collideCharacter(object, index, this.activeSprites);
                 }
             }
+            // draws a circle every time
+            // check for radius first and draw square if no radius
             this.ctx.beginPath();
             this.ctx.arc(object.location.x, object.location.y, object.radius, 0, Math.PI*2, false);
             this.ctx.fillStyle = object.color;
