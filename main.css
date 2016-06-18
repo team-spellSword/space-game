@@ -3,7 +3,29 @@
   margin: 0;
 }
 
-#canvas {
-  border: 3px solid black;
+.game-canvas {
   background: white;
+  position: absolute;
+  width: 100%
+
+}
+
+#game-container {
+  position: relative;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 2.5%;
+}
+
+#sprite-canvas {
+  border: 3px solid black;
+  z-index: 1;
+}
+
+#background-canvas {
+  z-index: 0;
+}
+
+#ui-canvas {
+  z-index: 2;
 }

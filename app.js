@@ -3,10 +3,13 @@ var gameApp = angular.module('app', []);
 gameApp.directive('ssCanvas', ['graphicsEngineService', function(graphicsEngineService) {
     return {
         restrict: 'AEC',
-        template: '<canvas id="canvas" width="800" height="480"></canvas>',
+        template: '<div id="game-container">\
+        <canvas class="game-canvas" id="sprite-canvas"></canvas>\
+        <canvas class="game-canvas" id="background-canvas"></canvas>\
+        </div>',
         link: function(scope, element) {
-            var canvas = element.find('canvas')[0];
-            graphicsEngineService.initialize(canvas);
+            var canvi = element.find('canvas');
+            graphicsEngineService.initialize(canvi[0], canvi[1]); // (sprite-layer, background)
         }
     };
 }]);
@@ -28,7 +31,7 @@ function(playerClass, graphicsEngineService, keyEventService, mobClass) {
             if (graphicsEngineService.activeSprites[i].blinking) {
                 console.log('blinking');
             } else {
-                graphicsEngineService.draw(graphicsEngineService.activeSprites[i], i);                
+                graphicsEngineService.draw(graphicsEngineService.activeSprites[i], i);
             }
         }
         graphicsEngineService.drawFloor();
