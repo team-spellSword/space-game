@@ -55,19 +55,19 @@ function(environmentConstants, weaponsClass) {
                     this.grounded = false;
                 },
                 collideWith: function(mob) {
-                        if (
-                            //check top: check right crossing mob left and top within mob body but and if left crosses mob right. doesn't check left cross mob right
-                            this.rightEdge >= mob.leftEdge && this.topEdge <= mob.bottomEdge && this.topEdge >= mob.topEdge && this.leftEdge <= mob.rightEdge) {return true;}
-                            // or
-                            //check bottom when mob is above (commit: ...takes two hits)
+                    if (
+                        //check top: check right crossing mob left and top within mob body but and if left crosses mob right. doesn't check left cross mob right
+                        this.rightEdge >= mob.leftEdge && this.topEdge <= mob.bottomEdge && this.topEdge >= mob.topEdge && this.leftEdge <= mob.rightEdge) {return true;}
+                        // or
+                        //check bottom when mob is above (commit: ...takes two hits)
                 },
                 takeHit: function(damage, activeSprites) {
                     this.hitPoints[0] -= damage;
                     if (this.hitPoints[0] < 1) {
-                        this.blinking = true;                        
+                        this.blinking = true;
                         if (this.hitPoints[0] < 1) { activeSprites.splice(activeSprites.indexOf(this), 1); }
                     }
-                }       
+                }
             };
         }
     };

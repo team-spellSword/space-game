@@ -2,7 +2,7 @@ gameApp.factory('mobClass', ['environmentConstants', function(environmentConstan
     return {
         createRedMob: function() {
             return {
-                location: { x: 500, y: 0 },
+                location: { x: 200, y: 0 },
                 direction: 'right',
                 color: 'red',
                 radius: 25,
@@ -51,8 +51,8 @@ gameApp.factory('mobClass', ['environmentConstants', function(environmentConstan
                     this.rightEdge = this.location.x + this.radius;
                     this.topEdge = this.location.y - this.radius;
                     this.bottomEdge = this.location.y + this.radius;
-                }                
-            }
+                }
+            };
         }
     };
 }]);
