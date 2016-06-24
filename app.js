@@ -37,14 +37,14 @@ function(playerClass, logicEngineService, renderingService, keyEventService, mob
 
         return function() {
             loops = 0;
-            logicEngineService.update();
-            keyEventService.register(players[0]);
+            while ((new Date).getTime() > nextGameTick && loops < maxFrameSkip) {
+                logicEngineService.update();
+                keyEventService.register(players[0]);
 
-            nextGameTick += skipTicks; loops++;
-
-            if ((new Date).getTime() > nextGameTick && loops < maxFrameSkip) {
-                renderingService.drawFrame();
+                nextGameTick += skipTicks; loops++;
             }
+
+            renderingService.drawFrame();
             window.onEachFrame(gameLoop);
         };
     })();
