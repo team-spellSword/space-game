@@ -21,18 +21,33 @@ function(playerClass, logicEngineService, renderingService, keyEventService, mob
 
     renderingService.activeSprites = mobs.concat(players);
 
-    function gameLoop() {
-        for (var i = 0; i < renderingService.activeSprites.length; i++) {
-            logicEngineService.processSprite(renderingService.activeSprites[i], i);
-        }
+    window.onEachFrame = (function() {
+        return window.requestAnimationFrame ||
+        window.webkitReqestAnimationFrame ||
+        window.mozReqestAnimationFrame ||
+        window.oReqesteAnimationFrame ||
+        window.msReqestAnimationFrame ||
+        function(callback) {
+            window.setTimeout(callback, 1000 / 60);
+        };
+    })();
 
-        renderingService.clearCanvas();
-        keyEventService.register(players[0]);
-        for (i = 0; i < renderingService.activeSprites.length; i++) {
-            if (!renderingService.activeSprites[i].blinking) { renderingService.drawCircle(renderingService.activeSprites[i], i); }
-        }
-        renderingService.drawFloor();
-    }
+    var gameLoop = (function() {
+        var loops = 0, skipTicks = 1000 / 60, maxFrameSkip = 10, nextGameTick = (new Date).getTime();
 
-    setInterval(gameLoop, 10);
+        return function() {
+            loops = 0;
+            logicEngineService.update();
+            keyEventService.register(players[0]);
+
+            nextGameTick += skipTicks; loops++;
+
+            if ((new Date).getTime() > nextGameTick && loops < maxFrameSkip) {
+                renderingService.drawFrame();
+            }
+            window.onEachFrame(gameLoop);
+        };
+    })();
+
+    window.onEachFrame(gameLoop);
 }]);

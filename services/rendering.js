@@ -8,8 +8,12 @@ gameApp.factory('renderingService', [function() {
             this.backgroundLayer = backgroundCanvas;
             this.backgroundCtx = backgroundCanvas.getContext('2d');
         },
-        clearCanvas: function() {
-            this.spriteCtx.clearRect(0, 0, this.spriteLayer.width, this.spriteLayer.height);
+        drawFrame: function() {
+            this.clearCanvas();
+            for (var i in this.activeSprites) {
+                if (!this.activeSprites[i].blinking) { this.drawCircle(this.activeSprites[i], i); }
+            }
+            this.drawFloor();
         },
         drawCircle: function(circle) {
             this.spriteCtx.beginPath();
@@ -24,6 +28,9 @@ gameApp.factory('renderingService', [function() {
             this.spriteCtx.fillStyle = 'red';
             this.spriteCtx.fill();
             this.spriteCtx.closePath();
+        },
+        clearCanvas: function() {
+            this.spriteCtx.clearRect(0, 0, this.spriteLayer.width, this.spriteLayer.height);
         }
     };
 }]);

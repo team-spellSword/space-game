@@ -16,9 +16,11 @@ function(collisionService, renderingService) {
     }
 
     return {
-        processSprite: function(sprite, index) {
-            processMovement(sprite);
-            processCollision(sprite, index);
+        update: function() {
+            for (var i in renderingService.activeSprites) {
+                processMovement(renderingService.activeSprites[i]);
+                processCollision(renderingService.activeSprites[i], i);
+            }
         }
     };
 }]);
