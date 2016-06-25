@@ -1,9 +1,12 @@
-gameApp.factory('renderingService', [function() {
+gameApp.factory('renderingService', ['tileMap', function(tileMap) {
     return {
         activeSprites: [],
-        initialize: function(spriteCanvas, backgroundCanvas) {
+        initialize: function(spriteCanvas, tileCanvas,backgroundCanvas) {
             this.spriteLayer = spriteCanvas;
             this.spriteCtx = spriteCanvas.getContext('2d');
+
+            this.tileLayer = tileCanvas;
+            this.tileCtx = tileCanvas.getContext('2d');
 
             this.backgroundLayer = backgroundCanvas;
             this.backgroundCtx = backgroundCanvas.getContext('2d');
@@ -13,7 +16,8 @@ gameApp.factory('renderingService', [function() {
             for (var i in this.activeSprites) {
                 if (!this.activeSprites[i].blinking) { this.drawCircle(this.activeSprites[i], i); }
             }
-            this.drawFloor();
+            // this.drawFloor();
+            this.drawMap(tileMap);
         },
         drawCircle: function(circle) {
             this.spriteCtx.beginPath();
@@ -31,6 +35,19 @@ gameApp.factory('renderingService', [function() {
         },
         clearCanvas: function() {
             this.spriteCtx.clearRect(0, 0, this.spriteLayer.width, this.spriteLayer.height);
+        },
+        drawMap: function(map) {
+            var xInterval = this.tileLayer.width / map.cols;
+            var yInterval = this.tileLayer.height / map.rows;
+            for (var y = 0; y < map.tiles.length; y++) {
+                for (var x = 0; x < map.tiles[y].length; x++) {
+                    if (map.keys[map.tiles[y][x]]) {
+                        this.tileCtx.fillStyle = 'red';
+                        this.tileCtx.fillRect(xInterval * x, yInterval * y, xInterval, yInterval);
+                        this.tileCtx.fill();
+                    }
+                }
+            }
         }
     };
 }]);
