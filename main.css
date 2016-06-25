@@ -4,7 +4,6 @@
 }
 
 .game-canvas {
-  background: white;
   position: absolute;
   width: 100%
 
@@ -24,6 +23,8 @@
 
 #background-canvas {
   z-index: 0;
+  background-image: url(assets/space-background.jpg);
+  background-size: 100%;
 }
 
 #ui-canvas {
