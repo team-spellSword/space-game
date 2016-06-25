@@ -1,5 +1,5 @@
-gameApp.factory('projectileClass', ['graphicsEngineService', 'environmentConstants',
-function(graphicsEngineService, environmentConstants) {
+gameApp.factory('projectileClass', ['renderingService', 'environmentConstants',
+function(renderingService, environmentConstants) {
     return {
         createBullet: function(weapon, direction, location) {
             var dir = {'right': weapon.projectileSpeed, 'left': -weapon.projectileSpeed};
@@ -21,7 +21,7 @@ function(graphicsEngineService, environmentConstants) {
                         ) { return true; }
                 }
             };
-            graphicsEngineService.activeSprites.push(bullet);
+            renderingService.activeSprites.push(bullet);
         }
     };
 }]);

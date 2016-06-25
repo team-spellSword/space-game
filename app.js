@@ -1,38 +1,53 @@
 var gameApp = angular.module('app', []);
 
-gameApp.directive('ssCanvas', ['graphicsEngineService', function(graphicsEngineService) {
+gameApp.directive('ssCanvas', ['renderingService', function(renderingService) {
     return {
         restrict: 'AEC',
-        template: '<canvas id="canvas" width="800" height="480"></canvas>',
+        template: '<div id="game-container">\
+        <canvas class="game-canvas" id="sprite-canvas" width="800" height="480"></canvas>\
+        <canvas class="game-canvas" id="background-canvas" width="800" height="480"></canvas>\
+        </div>',
         link: function(scope, element) {
-            var canvas = element.find('canvas')[0];
-            graphicsEngineService.initialize(canvas);
+            var canvi = element.find('canvas');
+            renderingService.initialize(canvi[0], canvi[1]); // (sprite-layer, background)
         }
     };
 }]);
 
-gameApp.controller('main', ['playerClass', 'graphicsEngineService', 'keyEventService', 'mobClass',
-function(playerClass, graphicsEngineService, keyEventService, mobClass) {
+gameApp.controller('main', ['playerClass', 'logicEngineService', 'renderingService', 'keyEventService', 'mobClass',
+function(playerClass, logicEngineService, renderingService, keyEventService, mobClass) {
     var players = [playerClass.create()];
-    // changed "circleMob" to "createRedMob"
-    // I'm working on mob function that creates random or particular types of mobs
-    // so we can create a specific quantity of mobs throughout each level
     var mobs = [mobClass.createRedMob()];
 
-    graphicsEngineService.activeSprites = mobs.concat(players);
+    renderingService.activeSprites = mobs.concat(players);
 
-    function gameLoop() {
-        graphicsEngineService.clearCanvas();
-        keyEventService.register(players[0]);
-        for (var i = 0; i < graphicsEngineService.activeSprites.length; i++) {
-            if (graphicsEngineService.activeSprites[i].blinking) {
-                console.log('blinking');
-            } else {
-                graphicsEngineService.draw(graphicsEngineService.activeSprites[i], i);                
+    window.onEachFrame = (function() {
+        return window.requestAnimationFrame ||
+        window.webkitReqestAnimationFrame ||
+        window.mozReqestAnimationFrame ||
+        window.oReqesteAnimationFrame ||
+        window.msReqestAnimationFrame ||
+        function(callback) {
+            window.setTimeout(callback, 1000 / 60);
+        };
+    })();
+
+    var gameLoop = (function() {
+        var loops = 0, skipTicks = 1000 / 60, maxFrameSkip = 10, nextGameTick = (new Date).getTime();
+
+        return function() {
+            loops = 0;
+            while ((new Date).getTime() > nextGameTick && loops < maxFrameSkip) {
+                logicEngineService.update();
+                keyEventService.register(players[0]);
+
+                nextGameTick += skipTicks; loops++;
             }
-        }
-        graphicsEngineService.drawFloor();
-    }
 
-    setInterval(gameLoop, 10);
+            renderingService.drawFrame();
+            window.onEachFrame(gameLoop);
+        };
+    })();
+
+    window.onEachFrame(gameLoop);
 }]);

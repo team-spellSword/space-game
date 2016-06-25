@@ -7,16 +7,21 @@
         <script src='vendor/angular.min.js'></script>
     </head>
     <body ng-app='app' ng-controller='main'>
-        <ss-canvas></ss-canvas>
+
+        <ss-canvas></ss-canvas>  <!-- Main game element -->
+
         <script src='app.js'></script>
 
+        <!-- Object Models -->
         <script src='classes/mob.js'></script>
         <script src='classes/player.js'></script>
         <script src='classes/projectile.js'></script>
         <script src='classes/weapons.js'></script>
 
+        <!-- Game Services -->
+        <script src='services/logicEngine.js'></script>
+        <script src='services/rendering.js'></script>
         <script src='services/environment.js'></script>
-        <script src='services/graphicsEngine.js'></script>
         <script src='services/keyEvent.js'></script>
         <script src='services/collision.js'></script>
 
