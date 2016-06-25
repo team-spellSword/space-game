@@ -5,11 +5,12 @@ gameApp.directive('ssCanvas', ['renderingService', function(renderingService) {
         restrict: 'AEC',
         template: '<div id="game-container">\
         <canvas class="game-canvas" id="sprite-canvas" width="800" height="480"></canvas>\
+        <canvas class="game-canvas" id="tile-canvas" width="800" height="480"></canvas>\
         <canvas class="game-canvas" id="background-canvas" width="800" height="480"></canvas>\
         </div>',
         link: function(scope, element) {
             var canvi = element.find('canvas');
-            renderingService.initialize(canvi[0], canvi[1]); // (sprite-layer, background)
+            renderingService.initialize(canvi[0], canvi[1], canvi[2]); // (sprite-layer, tile-map, background)
         }
     };
 }]);
