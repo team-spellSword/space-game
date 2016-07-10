@@ -10,7 +10,7 @@ function(collisionService, renderingService) {
         if (!collisionService.collideFloor(renderingService.spriteLayer, object)) {
             object.resolveGravity();
         } else if (object.projectile) {
-            renderingService.activeSprites.splice(index, 1);
+            collisionService.collideProjectile(object, index, renderingService.activeSprites);
         }
         if (object.player) { collisionService.collideCharacter(object, index, renderingService.activeSprites); }
     }
