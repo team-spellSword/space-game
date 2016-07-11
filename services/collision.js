@@ -1,4 +1,4 @@
-gameApp.factory('collisionService', [function() {
+gameApp.factory('collisionService', ['tileMap', 'renderingService', function(tileMap, renderingService) {
     return {
         collideFloor: function(canvas, object) {
             if (object.location.y + object.radius >= canvas.height - 10) {
@@ -27,6 +27,24 @@ gameApp.factory('collisionService', [function() {
                     break;
                 }
             }
+        },
+        collideTile: function(sprite, index) {
+            // our tiles are just an array of arrays in map constant
+            // iterate and check tiles for their properties
+            // if tile has a key/is solid...
+            // check canvas for dimensions
+            // if sprite touches a square/tile on the grid... do a thing
+            // tiles will need a location which means they'll each have to be an object
+            // change the tiles themselves in tileMap constant into a hash?
+
+
+            for (var y = 0; y < tileMap.tiles.length; y++) {
+                for (var x = 0; x < tileMap.tiles[y].length; x++) {
+                    if (tileMap.keys[tileMap.tiles[y][x]] !== 'solid') {
+                        sprite.tileInteract(tileMap.tiles[y][x], y, x);
+                    }
+                }
+            }
         }
-    };
+    }
 }]);

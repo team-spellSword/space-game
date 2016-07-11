@@ -1,9 +1,10 @@
-gameApp.factory('playerClass', ['environmentConstants', 'weaponsClass',
-function(environmentConstants, weaponsClass) {
+gameApp.factory('playerClass', ['environmentConstants', 'tileMap', 'weaponsClass', 'renderingService',
+function(environmentConstants, tileMap, weaponsClass, renderingService) {
     return {
         create: function() {
             return {
-                location: { x: 0, y: 0 },
+                // moving x moves it left and right???! should move it up and down right?
+                location: { x: 100, y: 0 },
                 direction: 'right',
                 color: 'blue',
                 radius: 20,
@@ -54,12 +55,27 @@ function(environmentConstants, weaponsClass) {
                     }
                     this.grounded = false;
                 },
+                tileInteract: function(tile, y, x) {
+                    var xInterval = renderingService.tileLayer.width / tileMap.cols;
+                    var yInterval = renderingService.tileLayer.height / tileMap.rows;                    
+                    // if my bottom is touching the tile's top 
+                    // and it's x location is within tile's left and right edge,
+                    // this.x is larger than the tile's y * interval (left edge)
+                    // this.x is smaller than the tile's y * interval * 2
+                    // don't move down.
+                    // if (this.bottomEdge >= xInterval * x && this.location.x >= yInterval * y && this.location.x <= yInterval * y + yInterval) {
+                    if (this.bottomEdge >= xInterval * x) {
+                        // this.vertV = 0;
+                        console.log(y);
+                    }
+
+                    // if my right is touching it's left, don't move left.
+                },
                 collideWith: function(mob) {
-                    if (
-                        //check top: check right crossing mob left and top within mob body but and if left crosses mob right. doesn't check left cross mob right
-                        this.rightEdge >= mob.leftEdge && this.topEdge <= mob.bottomEdge && this.topEdge >= mob.topEdge && this.leftEdge <= mob.rightEdge) {return true;}
-                        // or
-                        //check bottom when mob is above (commit: ...takes two hits)
+                    //check top: check right crossing mob left and top within mob body but and if left crosses mob right. doesn't check left cross mob right
+                    if (this.rightEdge >= mob.leftEdge && this.topEdge <= mob.bottomEdge && this.topEdge >= mob.topEdge && this.leftEdge <= mob.rightEdge) {return true;}
+                    // or
+                    //check bottom when mob is above (commit: ...takes two hits)
                 },
                 takeHit: function(damage, activeSprites) {
                     this.hitPoints[0] -= damage;

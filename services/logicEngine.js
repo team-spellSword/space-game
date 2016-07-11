@@ -12,7 +12,12 @@ function(collisionService, renderingService) {
         } else if (object.projectile) {
             renderingService.activeSprites.splice(index, 1);
         }
-        if (object.player) { collisionService.collideCharacter(object, index, renderingService.activeSprites); }
+        if (object.player) { 
+            collisionService.collideCharacter(object, index, renderingService.activeSprites);
+            collisionService.collideTile(object, index);
+        } else if (object.mob) {
+            // collisionService.collideTile(object, index);
+        }
     }
 
     return {
