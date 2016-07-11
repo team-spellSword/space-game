@@ -12,8 +12,12 @@ gameApp.factory('mobClass', ['environmentConstants', function(environmentConstan
                 vertV: 0,
                 hitPoints: [50, 50],
                 damage: 1,
+                mob: true,
                 resolveGravity: function() {
                     this.vertV += environmentConstants.gravityFactor;
+                },
+                tileInteract: function() {
+                    // console.log('mob tile interact');
                 },
                 takeHit: function(damage, activeSprites) {
                     this.hitPoints[0] -= damage;
@@ -39,9 +43,13 @@ gameApp.factory('mobClass', ['environmentConstants', function(environmentConstan
                 vertV: 0,
                 hitPoints: [50, 50],
                 damage: 1,
+                mob: true,
                 resolveGravity: function() {
                     this.vertV += environmentConstants.gravityFactor;
                 },
+                tileInteract: function() {
+                    // console.log('mob tile interact');
+                },                
                 takeHit: function(damage, activeSprites) {
                     this.hitPoints[0] -= damage;
                     if (this.hitPoints[0] < 1) { activeSprites.splice(activeSprites.indexOf(this), 1); }

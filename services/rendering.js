@@ -16,7 +16,6 @@ gameApp.factory('renderingService', ['tileMap', function(tileMap) {
             for (var i in this.activeSprites) {
                 if (!this.activeSprites[i].blinking) { this.drawCircle(this.activeSprites[i], i); }
             }
-            // this.drawFloor();
             this.drawMap(tileMap);
         },
         drawCircle: function(circle) {
@@ -42,7 +41,7 @@ gameApp.factory('renderingService', ['tileMap', function(tileMap) {
             for (var y = 0; y < map.tiles.length; y++) {
                 for (var x = 0; x < map.tiles[y].length; x++) {
                     if (map.keys[map.tiles[y][x]]) {
-                        this.tileCtx.fillStyle = 'red';
+                        this.tileCtx.fillStyle = "rgba(113, 139, 146, 0.09)";
                         this.tileCtx.fillRect(xInterval * x, yInterval * y, xInterval, yInterval);
                         this.tileCtx.fill();
                     }
