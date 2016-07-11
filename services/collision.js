@@ -46,5 +46,5 @@ gameApp.factory('collisionService', ['tileMap', 'renderingService', function(til
                 }
             }
         }
-    }
+    };
 }]);
