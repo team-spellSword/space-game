@@ -7,16 +7,17 @@ function(collisionService, renderingService) {
     }
 
     function processCollision(object, index) {
+        // Not fully implemented
         if (!collisionService.collideFloor(renderingService.spriteLayer, object)) {
             object.resolveGravity();
         } else if (object.projectile) {
             collisionService.collideProjectile(object, index, renderingService.activeSprites);
         }
-        if (object.player) { 
+        if (object.player) {
             collisionService.collideCharacter(object, index, renderingService.activeSprites);
             collisionService.collideTile(object, index);
         } else if (object.mob) {
-            // collisionService.collideTile(object, index);
+            collisionService.collideTile(object, index);
         }
     }
 
