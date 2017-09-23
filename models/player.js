@@ -11,7 +11,7 @@
             this.acceleration   = 0.25;d
             this.horzV          = 0; //positive is right
             this.vertV          = 0; //positive is down
-            this.weapon         = weaponsClass.datgun;
+            this.weapon         = new Weapon
             this.acted          = false;
             this.hitPoints      = [50, 50];
             this.player         = true;

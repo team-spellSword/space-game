@@ -1,13 +1,15 @@
-gameApp.factory('weaponsClass', ['projectileClass',
-function(projectileClass) {
-    return {
-        datgun: {
-            type: 'gun',
-            damage: 10,
-            projectileSpeed: 20,
-            act: function(direction, location) {
-                new Projectile(this, direction, location);
-            }
+// imports pending
+
+{
+    export class Weapon {
+        constructor() {
+            this.type =  'gun';
+            this.damage =  10;
+            this.projectileSpeed =  20;
         }
-    };
-}]);
+
+        act(direction, location) {
+            new Projectile(this, direction, location);
+        }
+    }
+}
