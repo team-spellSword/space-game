@@ -6,7 +6,7 @@ function(projectileClass) {
             damage: 10,
             projectileSpeed: 20,
             act: function(direction, location) {
-                projectileClass.createBullet(this, direction, location);
+                new Projectile(this, direction, location);
             }
         }
     };

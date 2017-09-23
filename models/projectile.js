@@ -1,9 +1,10 @@
-gameApp.factory('projectileClass', ['renderingService', 'environmentConstants',
-function(renderingService, environmentConstants) {
-    return {
-        createBullet: function(weapon, direction, location) {
-            var dir = {'right': weapon.projectileSpeed, 'left': -weapon.projectileSpeed};
-            var bullet = {
+// imports pending
+
+{
+    export class Projectile {
+        constructor(weapon, direction, location) {
+            let dir = {'right': weapon.projectileSpeed, 'left': -weapon.projectileSpeed};
+            let bullet = {
                 location: Object.create(location),
                 projectile: true,
                 color: 'black',
@@ -14,14 +15,20 @@ function(renderingService, environmentConstants) {
                 resolveGravity: function() {
                     this.vertV += 0.01 * environmentConstants.gravityFactor;
                 },
-                collideWith: function(object) {
+                collideWith: (object) => {
                     if (
-                            (this.location.x >= object.leftEdge && this.location.x <= object.rightEdge) && // Collide x
-                            (this.location.y <= object.bottomEdge && this.location.y >= object.topEdge) // Collide y
-                        ) { return true; }
+                            (
+                                this.location.x >= object.leftEdge && 
+                                this.location.x <= object.rightEdge
+                            ) && // Collide x
+                            (
+                                this.location.y <= object.bottomEdge && 
+                                this.location.y >= object.topEdge
+                            ) // Collide y
+                        ) return true;
                 }
-            };
+            }
             renderingService.activeSprites.push(bullet);
         }
-    };
-}]);
+    }
+}
