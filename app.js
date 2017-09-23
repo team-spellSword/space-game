@@ -17,7 +17,7 @@ gameApp.directive('ssCanvas', ['renderingService', function(renderingService) {
 
 gameApp.controller('main', ['playerClass', 'logicEngineService', 'renderingService', 'keyEventService', 'mobClass',
 function(playerClass, logicEngineService, renderingService, keyEventService, mobClass) {
-    var players = [playerClass.create()];
+    var players = [new Player];
     var mobs = [(new Mob).createRedMob()];
 
     renderingService.activeSprites = mobs.concat(players);
