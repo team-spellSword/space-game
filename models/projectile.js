@@ -26,7 +26,7 @@ class Projectile {
                         ) // Collide y
                     ) return true;
             }
-        }
+        };
         renderingService.activeSprites.push(bullet);
     }
 }
